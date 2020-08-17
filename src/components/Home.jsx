@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 // import getImages from '../controller/getImages';
 import { toJson } from 'unsplash-js';
 import unsplash from '../controller/getImages';
-import Header from './Header';
 import Item from './Item';
 
 const Home = ({ category, data, setData }) => {
   useEffect(() => {
-    unsplash.photos.listPhotos(4, 20, 'popular').then(toJson).then((res) => setData(res));
-  }, [category]);
+    unsplash.photos.listPhotos(1, 20, 'popular').then(toJson).then((res) => setData(res));
+  }, []);
 
   /* useEffect(() => {
     getImages(category).then((res) => {
@@ -17,13 +17,39 @@ const Home = ({ category, data, setData }) => {
     }).catch((e) => console.log(e));
   }, [category]); */
 
-  console.log(data);
+  /* const [currScrollPosition, setCurrScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScrollEvent = () => {
+      setCurrScrollPosition(window.scrollY);
+    };
+    document.addEventListener('scroll', handleScrollEvent);
+    return () => document.removeEventListener('scroll', handleScrollEvent);
+  }, []);
+
+  console.log(currScrollPosition);
+
+  useEffect(() => {
+    if (currScrollPosition > 40 && currScrollPosition < 46) {
+      unsplash.photos.listPhotos(2, 20, 'popular')
+        .then(toJson)
+        .then((res) => {
+          setData(data.concat(res));
+          console.log(data.concat(res));
+        });
+    }
+  }, [currScrollPosition]); */
 
   return (
-    <div>
+    <div className="home">
       <section className="list-container">
         {data.map((dataObj) => (
-          <Item key={dataObj.id} url={dataObj.urls.small} description={dataObj.description} />
+          <Item
+            key={dataObj.id}
+            url={dataObj.urls.small}
+            description={dataObj.description}
+            title={dataObj.alt_description}
+          />
         ))}
       </section>
     </div>

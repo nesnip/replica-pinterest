@@ -1,0 +1,19 @@
+.home {
+  padding-top: 80px;
+}
+
+.list-container {
+  columns: 6;
+
+  @media screen and (max-width: 1511px) {
+    columns: 5;
+  }
+  
+  @media screen and (max-width: 1259px) {
+    columns: 4;
+  }
+  
+  @media screen and (max-width: 1007px) {
+    columns: 3;
+  }
+}

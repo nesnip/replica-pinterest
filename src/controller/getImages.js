@@ -1,9 +1,6 @@
-import fetch from 'node-fetch';
 import Unsplash from 'unsplash-js';
 import { accessKey, endPoint } from './access';
 
-
-global.fetch = fetch;
 const unsplash = new Unsplash({ accessKey });
 export default unsplash;
 
